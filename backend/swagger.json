@@ -32,7 +32,7 @@
                 "tags": [
                     "Memes"
                 ],
-                "summary": "Get all memes in the system",
+                "summary": "Get latest 100 memes in the system",
                 "responses": {
                     "200": {
                         "description": "OK",

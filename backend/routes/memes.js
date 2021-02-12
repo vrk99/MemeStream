@@ -4,12 +4,14 @@ const mongoose = require('mongoose');
 
 const Meme = require('../models/Meme.js');
 
+// GET /memes route: returns latest 100 memes in the system
 router.get('/', (req, res) => {
   Meme.find().sort({created_at: -1}).limit(100).select('id name caption url').exec((err, memes) =>{
     res.send(memes);
   })
 });
 
+// POST /memes route: adds a new meme to the system, if not already present
 router.post('/', (req, res) => {
   Meme.findOne({name: req.body.name, caption: req.body.caption, url: req.body.url}, (err, meme) => {
     if(err){
@@ -34,6 +36,7 @@ router.post('/', (req, res) => {
   })
 })
 
+//GET /memes/{id} route: returns the meme with given id, provided it is present in the system
 router.get('/:id', (req, res) => {
   Meme.findOne({_id: mongoose.Types.ObjectId(req.params.id)}).select('id name caption url').exec((err, meme) => {
     if(err){
@@ -48,6 +51,7 @@ router.get('/:id', (req, res) => {
   });
 })
 
+// PATCH /memes/{id} route: updates caption and/or url of the meme with given id
 router.patch('/:id', (req, res) => {
   var updatedMeme = {};
   if(req.body.caption){
@@ -66,6 +70,7 @@ router.patch('/:id', (req, res) => {
   });
 })
 
+// DELETE /memes/{id} route: deletes the meme with given id
 router.delete('/:id', (req, res) => {
   Meme.findOneAndDelete({_id: mongoose.Types.ObjectId(req.params.id)}, (err, meme) => {
     if(err){

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// schema of the meme
 const MemeSchema = mongoose.Schema({
     name: {
         type: String

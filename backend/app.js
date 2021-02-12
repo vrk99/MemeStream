@@ -6,6 +6,7 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+// MongoDB service port
 const mongoURI = "mongodb://localhost/xmeme"
 mongoose.connect(process.env.MONGODB_URI || mongoURI, {useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false});
 
@@ -17,6 +18,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Express app setup
 app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
