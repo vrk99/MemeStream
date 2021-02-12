@@ -1,0 +1,21 @@
+{
+  "name": "xmeme",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^2.4.21",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "^1.6.3",
+    "mongoose": "^5.11.15",
+    "morgan": "~1.9.1",
+    "pm2": "^4.5.4",
+    "swagger-ui-express": "^4.1.6"
+  }
+}

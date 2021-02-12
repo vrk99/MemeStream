@@ -1,0 +1,225 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "XMeme Swagger UI",
+        "description": "XMeme API",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "ec2-3-19-209-178.us-east-2.compute.amazonaws.com:8081",
+    "basePath": "/",
+    "tags": [
+        {
+            "name": "Memes",
+            "description": "API for the Memes"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/memes": {
+            "get": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Get all memes in the system",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "caption": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "MongoDB.Types.ObjectID"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Create new meme in the system",
+                "parameters": [
+                    {
+                        "name": "meme",
+                        "in": "body",
+                        "description": "New meme's data",
+                        "schema": {
+                            "type": "object",
+                            "required": {
+                                "name": true,
+                                "caption": true,
+                                "url": true
+                            },
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "caption": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New Meme is created",
+                        "schema": {
+                            "$ref": "#/definitions/Meme/properties/_id"
+                        }
+                    },
+                    "409": {
+                        "description": "This meme already exists"
+                    }
+                }
+            }
+        },
+        "/memes/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "requires": true,
+                    "description": "ID of meme",
+                    "type": "string"
+                }
+            ],
+            "get": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Get meme by ID",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "caption": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                },
+                                "id": {
+                                    "type": "MongoDB.Types.ObjectID"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "err": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Edit a meme's content in the system",
+                "parameters": [
+                    {
+                        "name": "edited_meme",
+                        "in": "body",
+                        "description": "Updated meme's data",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "caption": {
+                                    "type": "string"
+                                },
+                                "url": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }
+                ],
+                "produces": [
+                    "http status code"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Memes"
+                ],
+                "summary": "Delete a meme from the system",
+                "produces": [
+                    "http status code"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Meme": {
+            "properties": {
+                "_id": {
+                    "type": "MongoDB.Types.ObjectID",
+                    "uniqueItems": true
+                },
+                "name": {
+                    "type": "string"
+                },
+                "caption": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "date-time"
+                }
+            }
+        }
+    }
+}
