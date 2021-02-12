@@ -1,4 +1,4 @@
-const api_endpoint = "http://ec2-3-19-209-178.us-east-2.compute.amazonaws.com:8081/memes/";
+const api_endpoint = "http://localhost:8081/memes/";
 
 function getMemes(){
     $.get(api_endpoint, (memes) => {
